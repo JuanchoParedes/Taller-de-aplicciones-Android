@@ -1,4 +1,4 @@
-package com.example.tallersemana7.data.model
+package com.example.tallersemana7.data.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class ManagerEntity(
     @PrimaryKey(autoGenerate = true)
     val _id: Int,
-    val name: String,
-    var customerList: List<CustomerEntity>
+    val userName: String,
+    val password: String,
+    var associatedCustomers: List<CustomerEntity>
 )

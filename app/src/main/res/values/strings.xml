@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Taller Semana 7</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_last_name">Lastname</string>
+    <string name="hint_identification">Identification</string>
+    <string name="hint_phone">Phone</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+
+    <string name="add_customer_button_label">Add Customer</string>
+    <string name="login_button_label">Log In</string>
+    <string name="create_user_button_label">Create User</string>
 </resources>

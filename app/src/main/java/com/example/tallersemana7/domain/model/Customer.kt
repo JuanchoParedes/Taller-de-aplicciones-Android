@@ -1,4 +1,4 @@
-package com.example.tallersemana7.model
+package com.example.tallersemana7.domain.model
 
 data class Customer(
     val name: String,

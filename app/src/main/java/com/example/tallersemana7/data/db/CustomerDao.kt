@@ -4,20 +4,24 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.tallersemana7.model.Customer
+import com.example.tallersemana7.data.entity.CustomerEntity
 
 @Dao
 interface CustomerDao {
 
     @Query("SELECT * FROM CUSTOMER")
-    fun getAllCustomers(): List<Customer>
+    fun getAllCustomers(): List<CustomerEntity>
+
+    @Query("SELECT * FROM CUSTOMER")
+    fun getCustomersByManager(managerUserName: String): List<CustomerEntity>
 
     @Query("SELECT * FROM CUSTOMER WHERE identification = :identification")
     fun getCustomerByIdentification(identification: String)
 
     @Insert
-    fun insertCustomer(customer: Customer)
+    fun insertCustomer(customer: CustomerEntity)
 
     @Delete
-    fun deleteCustomer(customer: Customer)
+    fun deleteCustomer(customer: CustomerEntity)
+
 }
