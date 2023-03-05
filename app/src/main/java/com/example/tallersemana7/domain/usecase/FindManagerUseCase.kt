@@ -1,4 +1,4 @@
-package com.example.tallersemana7.usecase
+package com.example.tallersemana7.domain.usecase
 
 import com.example.tallersemana7.domain.repository.ManagerRepository
 
