@@ -17,6 +17,7 @@ class DomainModule {
     ): FindManagerUseCase = FindManagerUseCase(
         repository
     )
+
     @Singleton
     @Provides
     internal fun provideCreateManagerUseCase(
@@ -50,5 +51,12 @@ class DomainModule {
     internal fun provideLogoutUseCase(
         repository: ManagerRepository
     ): LogoutUseCase = LogoutUseCase(repository)
+
+
+    @Singleton
+    @Provides
+    internal fun provideGetManagerUseCase(
+        managerRepository: ManagerRepository
+    ): GetManagerUseCase = GetManagerUseCase(managerRepository)
 
 }

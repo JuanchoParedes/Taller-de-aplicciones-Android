@@ -9,6 +9,8 @@ interface ManagerRepository {
 
     fun createManager(username: String, password: String): Completable
 
+    fun getManager(): Single<String>
+
     fun logIn(username: String, password: String): Single<Boolean>
 
     fun logout(): Completable

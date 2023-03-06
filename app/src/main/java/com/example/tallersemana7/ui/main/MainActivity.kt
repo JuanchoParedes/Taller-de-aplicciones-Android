@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
@@ -47,6 +48,9 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
 
+        val header = navView.getHeaderView(0)
+        val tvManager = header.findViewById<TextView>(R.id.tvManagerName)
+
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home, R.id.nav_create_customer
@@ -58,6 +62,10 @@ class MainActivity : AppCompatActivity() {
         viewModel.logoutLiveData.observe(this, EventObserver {
             if (it) goToSplash()
         })
+
+        viewModel.managerLiveData.observe(this) {
+            tvManager.text = it
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

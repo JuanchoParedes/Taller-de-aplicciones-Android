@@ -56,7 +56,8 @@ class UIModule {
     @Singleton
     @Provides
     internal fun provideMainViewModelFactory(
-        logoutUseCase: LogoutUseCase
-    ): MainViewModelFactory = MainViewModelFactory(logoutUseCase)
+        logoutUseCase: LogoutUseCase,
+        getManagerUseCase: GetManagerUseCase
+    ): MainViewModelFactory = MainViewModelFactory(logoutUseCase, getManagerUseCase)
 
 }

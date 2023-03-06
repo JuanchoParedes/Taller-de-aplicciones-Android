@@ -22,6 +22,10 @@ class ManagerRepositoryImpl(
             .andThen(sharedPrefsDataSource.registerManager(username))
     }
 
+    override fun getManager(): Single<String> {
+        return sharedPrefsDataSource.getManager()
+    }
+
     override fun logIn(username: String, password: String): Single<Boolean> =
         managerDao.getManager(username, password).flatMapCompletable {
             sharedPrefsDataSource.registerManager(it.userName ?: "")
