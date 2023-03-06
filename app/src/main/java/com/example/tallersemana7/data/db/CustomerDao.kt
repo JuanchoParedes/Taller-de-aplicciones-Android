@@ -12,11 +12,11 @@ interface CustomerDao {
     @Query("SELECT * FROM CUSTOMER")
     fun getAllCustomers(): List<CustomerEntity>
 
-    @Query("SELECT * FROM CUSTOMER")
-    fun getCustomersByManager(managerUserName: String): List<CustomerEntity>
+//    @Query("SELECT * FROM CUSTOMER WHERE managerUsername = :managerUsername")
+//    fun getCustomersByManager(managerUserName: String): List<CustomerEntity>
 
     @Query("SELECT * FROM CUSTOMER WHERE identification = :identification")
-    fun getCustomerByIdentification(identification: String)
+    fun getCustomerByIdentification(identification: String): CustomerEntity
 
     @Insert
     fun insertCustomer(customer: CustomerEntity)

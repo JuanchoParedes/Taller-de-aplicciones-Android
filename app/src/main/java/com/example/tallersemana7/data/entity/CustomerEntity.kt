@@ -11,5 +11,6 @@ data class CustomerEntity(
     val lastName: String,
     val identification: String,
     val phone: String,
-    val email: String
+    val email: String,
+    val managerUsername: String
 )

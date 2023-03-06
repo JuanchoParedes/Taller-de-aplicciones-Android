@@ -1,13 +1,24 @@
 package com.example.tallersemana7.data.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.tallersemana7.domain.model.Manager
 
 @Entity(tableName = "MANAGER")
-data class ManagerEntity(
+class ManagerEntity {
     @PrimaryKey(autoGenerate = true)
-    val _id: Int,
-    val userName: String,
-    val password: String,
-    var associatedCustomers: List<CustomerEntity>
-)
+    var id: Int? = null
+
+    @ColumnInfo(name = "USERNAME")
+    var userName: String? = null
+
+    @ColumnInfo(name = "PASSWORD")
+    var password: String? = null
+}
+
+fun Manager.mapToLocalEntity() = ManagerEntity().also {
+    it.userName = this.username
+    it.password = this.password
+}
+

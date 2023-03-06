@@ -1,42 +1,53 @@
 package com.example.tallersemana7.ui.main
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.navigation.NavigationView
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.tallersemana7.R
-import com.example.tallersemana7.di.ComponentProvider
-import com.example.tallersemana7.ui.login.LoginActivity
-import javax.inject.Inject
+import com.example.tallersemana7.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var factory: MainViewModelFactory
-    private lateinit var mainViewModel: MainViewModel
+    private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        val component = (application as ComponentProvider).getComponent()
-        component.inject(this)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        mainViewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
-
-        mainViewModel.findManagerLiveData.observe(this) { managerIsLogged ->
-            if (managerIsLogged) goToCustomerActivity()
-            else goToLoginActivity()
-        }
+        setSupportActionBar(binding.appBarMain.toolbar)
+        val drawerLayout: DrawerLayout = binding.drawerLayout
+        val navView: NavigationView = binding.navView
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.nav_home, R.id.nav_create_customer
+            ), drawerLayout
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 
-    private fun goToLoginActivity() {
-        startActivity(Intent(this, LoginActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        })
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.main, menu)
+        return true
     }
 
-    private fun goToCustomerActivity() {
-     //   TODO("Not yet implemented")
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }

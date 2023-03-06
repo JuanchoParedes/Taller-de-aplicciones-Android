@@ -7,7 +7,12 @@
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
 
-    <string name="add_customer_button_label">Add Customer</string>
+    <string name="create_customer_button_label">Create Customer</string>
     <string name="login_button_label">Log In</string>
-    <string name="create_user_button_label">Create User</string>
+    <string name="create_manager_button_label">Create Manager</string>
+    <string name="home_title">Home</string>
+    <string name="action_credits">Credits</string>
+
+    <string name="alert_dialog_invalid_fields_body">All fields are required</string>
+
 </resources>

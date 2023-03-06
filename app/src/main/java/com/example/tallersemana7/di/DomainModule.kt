@@ -1,6 +1,7 @@
 package com.example.tallersemana7.di
 
 import com.example.tallersemana7.domain.repository.ManagerRepository
+import com.example.tallersemana7.domain.usecase.CreateManagerUseCase
 import com.example.tallersemana7.domain.usecase.FindManagerUseCase
 import dagger.Module
 import dagger.Provides
@@ -16,4 +17,9 @@ class DomainModule {
     ): FindManagerUseCase = FindManagerUseCase(
         repository
     )
+    @Singleton
+    @Provides
+    internal fun provideCreateManagerUseCase(
+        repository: ManagerRepository
+    ): CreateManagerUseCase = CreateManagerUseCase(repository)
 }

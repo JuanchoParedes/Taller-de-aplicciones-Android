@@ -1,7 +1,7 @@
 package com.example.tallersemana7.di
 
 import com.example.tallersemana7.MyApplication
-import com.example.tallersemana7.ui.main.MainActivity
+import com.example.tallersemana7.ui.splash.SplashActivity
 import dagger.Component
 import javax.inject.Singleton
 
@@ -13,5 +13,5 @@ interface ApplicationComponent {
 
     fun inject(myApplication: MyApplication)
 
-    fun inject(activity: MainActivity)
+    fun inject(activity: SplashActivity)
 }

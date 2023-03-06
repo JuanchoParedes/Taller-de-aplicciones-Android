@@ -1,12 +1,12 @@
-package com.example.tallersemana7.ui.main
+package com.example.tallersemana7.ui.splash
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.tallersemana7.domain.usecase.FindManagerUseCase
+import com.example.tallersemana7.ui.BaseViewModel
 
-class MainViewModel(
+class SplashViewModel(
     findManagerUseCase: FindManagerUseCase
-) : ViewModel() {
+) : BaseViewModel() {
 
     var findManagerLiveData = MutableLiveData<Boolean>()
         private set
