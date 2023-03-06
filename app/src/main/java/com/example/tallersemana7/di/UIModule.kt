@@ -1,9 +1,6 @@
 package com.example.tallersemana7.di
 
-import com.example.tallersemana7.domain.usecase.CreateCustomerUseCase
-import com.example.tallersemana7.domain.usecase.CreateManagerUseCase
-import com.example.tallersemana7.domain.usecase.FindManagerUseCase
-import com.example.tallersemana7.domain.usecase.LogInUseCase
+import com.example.tallersemana7.domain.usecase.*
 import com.example.tallersemana7.ui.createcustomer.CreateCustomerViewModelFactory
 import com.example.tallersemana7.ui.createmanager.CreateManagerViewModelFactory
 import com.example.tallersemana7.ui.customersbymanager.CustomersByManagerViewModelFactory
@@ -43,7 +40,7 @@ class UIModule {
     @Singleton
     @Provides
     internal fun provideCustomersByManagerViewModelFactory(
-        useCase: CreateCustomerUseCase
+        useCase: GetCustomersByManagerUseCase
     ): CustomersByManagerViewModelFactory = CustomersByManagerViewModelFactory(
         useCase
     )

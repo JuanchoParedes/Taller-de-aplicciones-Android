@@ -2,10 +2,7 @@ package com.example.tallersemana7.di
 
 import com.example.tallersemana7.domain.repository.CustomerRepository
 import com.example.tallersemana7.domain.repository.ManagerRepository
-import com.example.tallersemana7.domain.usecase.CreateCustomerUseCase
-import com.example.tallersemana7.domain.usecase.CreateManagerUseCase
-import com.example.tallersemana7.domain.usecase.FindManagerUseCase
-import com.example.tallersemana7.domain.usecase.LogInUseCase
+import com.example.tallersemana7.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -38,6 +35,14 @@ class DomainModule {
         repository: CustomerRepository
     ): CreateCustomerUseCase = CreateCustomerUseCase(
         repository
+    )
+
+    @Singleton
+    @Provides
+    internal fun provideGetCustomersByManagerUseCase(
+        customerRepository: CustomerRepository
+    ): GetCustomersByManagerUseCase = GetCustomersByManagerUseCase(
+        customerRepository
     )
 
 }

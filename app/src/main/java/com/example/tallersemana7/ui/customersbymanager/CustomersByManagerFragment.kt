@@ -6,8 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.tallersemana7.R
 import com.example.tallersemana7.di.ComponentProvider
+import com.example.tallersemana7.ui.customersbymanager.adapter.CustomerDetailsAdapter
 import javax.inject.Inject
 
 class CustomersByManagerFragment: Fragment() {
@@ -15,6 +19,9 @@ class CustomersByManagerFragment: Fragment() {
     @Inject
     lateinit var factory: CustomersByManagerViewModelFactory
     private lateinit var viewModel: CustomersByManagerViewModel
+
+    private val customerDetailsAdapter = CustomerDetailsAdapter()
+    private lateinit var rvCustomersByManager: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +41,19 @@ class CustomersByManagerFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel
+        rvCustomersByManager = view.findViewById(R.id.rvCustomersByManager)
+        rvCustomersByManager.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = customerDetailsAdapter
+        }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        viewModel.customersByManagerLiveData.observe(viewLifecycleOwner) {
+            customerDetailsAdapter.submitList(it)
+        }
+
     }
 }

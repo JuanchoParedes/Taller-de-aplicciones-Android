@@ -2,6 +2,7 @@ package com.example.tallersemana7.data.repository
 
 import com.example.tallersemana7.data.db.CustomerDao
 import com.example.tallersemana7.data.entity.CustomerEntity
+import com.example.tallersemana7.data.entity.mapToDomain
 import com.example.tallersemana7.data.preferences.SharedPrefsDataSource
 import com.example.tallersemana7.domain.model.Customer
 import com.example.tallersemana7.domain.repository.CustomerRepository
@@ -12,10 +13,16 @@ import io.reactivex.rxjava3.core.Single
 class CustomerRepositoryImpl(
     private val sharedPrefsDataSource: SharedPrefsDataSource,
     private val dao: CustomerDao
-): CustomerRepository {
+) : CustomerRepository {
 
-    override fun getCustomersByManager(managerUsername: String): Flowable<List<Customer>> {
-        TODO("Not yet implemented")
+    override fun getCustomersByManager(): Flowable<List<Customer>> {
+        return sharedPrefsDataSource.getManager()
+            .toFlowable()
+            .flatMap { managerUsername ->
+                dao.getCustomersByManager(managerUsername).map {
+                    it.mapToDomain()
+                }
+            }
     }
 
     override fun addCustomer(

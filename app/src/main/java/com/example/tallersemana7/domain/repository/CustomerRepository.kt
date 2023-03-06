@@ -7,7 +7,7 @@ import io.reactivex.rxjava3.core.Single
 
 interface CustomerRepository {
 
-    fun getCustomersByManager(managerUsername: String): Flowable<List<Customer>>
+    fun getCustomersByManager(): Flowable<List<Customer>>
 
     fun addCustomer(
         name: String,
