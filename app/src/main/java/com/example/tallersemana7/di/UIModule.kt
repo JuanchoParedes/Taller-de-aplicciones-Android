@@ -5,6 +5,7 @@ import com.example.tallersemana7.ui.createcustomer.CreateCustomerViewModelFactor
 import com.example.tallersemana7.ui.createmanager.CreateManagerViewModelFactory
 import com.example.tallersemana7.ui.customersbymanager.CustomersByManagerViewModelFactory
 import com.example.tallersemana7.ui.login.LogInViewModelFactory
+import com.example.tallersemana7.ui.main.MainViewModelFactory
 import com.example.tallersemana7.ui.splash.SplashViewModelFactory
 import dagger.Module
 import dagger.Provides
@@ -15,7 +16,7 @@ class UIModule {
 
     @Singleton
     @Provides
-    internal fun provideMainViewModelFactory(
+    internal fun provideSplashViewModelFactory(
         findManagerUseCase: FindManagerUseCase
     ): SplashViewModelFactory = SplashViewModelFactory(
         findManagerUseCase
@@ -52,5 +53,10 @@ class UIModule {
     ): CreateCustomerViewModelFactory = CreateCustomerViewModelFactory(
         useCase
     )
+    @Singleton
+    @Provides
+    internal fun provideMainViewModelFactory(
+        logoutUseCase: LogoutUseCase
+    ): MainViewModelFactory = MainViewModelFactory(logoutUseCase)
 
 }

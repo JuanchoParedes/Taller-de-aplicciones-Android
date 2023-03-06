@@ -23,9 +23,11 @@ class SharedPrefsDataSource(
         sharedPreferences.getString(MANAGER, "")
     }
 
-    fun logoutManager(userName: String) {
-        sharedPreferences.edit().apply {
-            clear().apply()
+    fun logoutManager(): Completable {
+        return Completable.fromAction {
+            sharedPreferences.edit().apply {
+                clear().apply()
+            }
         }
     }
 

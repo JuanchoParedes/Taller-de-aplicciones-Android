@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.tallersemana7.EventObserver
 import com.example.tallersemana7.R
 import com.example.tallersemana7.databinding.FragmentCreateCustomerBinding
 import com.example.tallersemana7.di.ComponentProvider
@@ -81,21 +82,22 @@ class CreateCustomerFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.onCustomerCreatedSuccessLiveData.observe(viewLifecycleOwner) { success ->
-            if (success) {
-                context?.showAlertDialog(
-                    getString(R.string.alert_dialog_customer_created_body)
-                )
-                etName.setText("")
-                etLastName.setText("")
-                etIdentification.setText("")
-                etPhone.setText("")
-                etEmail.setText("")
-            } else
-                context?.showAlertDialog(
-                    getString(R.string.alert_dialog_general_error)
-                )
-        }
+        viewModel.onCustomerCreatedSuccessLiveData.observe(
+            viewLifecycleOwner, EventObserver { success ->
+                if (success) {
+                    context?.showAlertDialog(
+                        getString(R.string.alert_dialog_customer_created_body)
+                    )
+                    etName.setText("")
+                    etLastName.setText("")
+                    etIdentification.setText("")
+                    etPhone.setText("")
+                    etEmail.setText("")
+                } else
+                    context?.showAlertDialog(
+                        getString(R.string.alert_dialog_general_error)
+                    )
+            })
     }
 
 }

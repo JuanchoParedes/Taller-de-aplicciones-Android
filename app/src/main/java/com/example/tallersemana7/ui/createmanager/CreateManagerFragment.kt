@@ -9,6 +9,7 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.tallersemana7.EventObserver
 import com.example.tallersemana7.R
 import com.example.tallersemana7.di.ComponentProvider
 import com.example.tallersemana7.ui.showAlertDialog
@@ -61,7 +62,7 @@ class CreateManagerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel.onManagerCreatedSuccessLiveData.observe(viewLifecycleOwner) { success ->
+        viewModel.onManagerCreatedSuccessLiveData.observe(viewLifecycleOwner, EventObserver { success ->
             if (success)
                 context?.showAlertDialog(
                     getString(R.string.alert_dialog_manager_created_body)
@@ -69,7 +70,7 @@ class CreateManagerFragment : Fragment() {
             else context?.showAlertDialog(
                 getString(R.string.alert_dialog_general_error)
             )
-        }
+        })
     }
 
 }

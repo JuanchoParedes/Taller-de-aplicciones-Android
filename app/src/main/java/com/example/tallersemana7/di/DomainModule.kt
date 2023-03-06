@@ -45,4 +45,10 @@ class DomainModule {
         customerRepository
     )
 
+    @Singleton
+    @Provides
+    internal fun provideLogoutUseCase(
+        repository: ManagerRepository
+    ): LogoutUseCase = LogoutUseCase(repository)
+
 }

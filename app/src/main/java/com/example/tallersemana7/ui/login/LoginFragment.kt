@@ -1,5 +1,6 @@
 package com.example.tallersemana7.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.tallersemana7.R
 import com.example.tallersemana7.di.ComponentProvider
+import com.example.tallersemana7.ui.main.MainActivity
 import com.example.tallersemana7.ui.showAlertDialog
+import com.example.tallersemana7.ui.splash.SplashActivity
 import javax.inject.Inject
 
 class LoginFragment: Fragment() {
@@ -64,11 +67,19 @@ class LoginFragment: Fragment() {
         }
 
         viewModel.logInProcessLiveData.observe(viewLifecycleOwner) { loginSuccess ->
-            if (loginSuccess) Toast.makeText(context, "logged", Toast.LENGTH_SHORT).show()
+            if (loginSuccess) goToMainActivity()
             else context?.showAlertDialog(
                 getString(R.string.alert_dialog_user_does_not_exists_body)
             )
         }
+    }
+
+    private fun goToMainActivity() {
+        val intent = Intent(context, MainActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        }
+        startActivity(intent)
+        activity?.finish()
     }
 
     private fun navigateToMain() {

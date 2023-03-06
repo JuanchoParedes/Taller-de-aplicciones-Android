@@ -18,12 +18,16 @@ class ManagerRepositoryImpl(
     }
 
     override fun createManager(username: String, password: String): Completable {
-       return managerDao.createManager(Manager(username, password).mapToLocalEntity())
-           .andThen(sharedPrefsDataSource.registerManager(username))
+        return managerDao.createManager(Manager(username, password).mapToLocalEntity())
+            .andThen(sharedPrefsDataSource.registerManager(username))
     }
 
     override fun logIn(username: String, password: String): Single<Boolean> =
         managerDao.getManager(username, password).flatMapCompletable {
             sharedPrefsDataSource.registerManager(it.userName ?: "")
         }.toSingle { true }
+
+    override fun logout(): Completable {
+        return sharedPrefsDataSource.logoutManager()
+    }
 }

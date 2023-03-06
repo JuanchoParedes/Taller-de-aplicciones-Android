@@ -11,7 +11,9 @@
     <string name="login_button_label">Log In</string>
     <string name="create_manager_button_label">Create Manager</string>
     <string name="home_title">Home</string>
+    <string name="empty_results">There are no customers added for this manager. Add customers by opening the hamburger menu.</string>
     <string name="action_credits">Credits</string>
+    <string name="action_logout">Logout</string>
 
     <string name="alert_dialog_invalid_fields_body">All fields are required</string>
     <string name="alert_dialog_user_does_not_exists_body">User does not exist</string>
@@ -22,4 +24,6 @@
 
     <string name="customers_by_manager_title">Customers by manager</string>
     <string name="create_customer_title">Create Customer</string>
+    <string name="credits">Elaborado por: Juan Francisco Paredes Blanco, para la asignatura de Plataformas de Desarrollo de Software.
+    \n Especializacion en Ingenieria de Software. Universidad Uniminuto. 2023</string>
 </resources>

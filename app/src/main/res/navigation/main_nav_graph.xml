@@ -21,4 +21,12 @@
 
     </fragment>
 
+    <dialog
+        tools:layout="@layout/fragment_create_customer"
+        android:id="@+id/credits"
+        android:label="@string/action_credits"
+        android:name="com.example.tallersemana7.ui.CreditsFragment" >
+
+    </dialog>
+
 </navigation>
