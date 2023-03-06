@@ -51,6 +51,9 @@ class DataModule {
     @Singleton
     @Provides
     internal fun provideCustomerRepository(
+        dataSource: SharedPrefsDataSource,
         database: DataBase
-    ): CustomerRepository = CustomerRepositoryImpl(database.customerDao())
+    ): CustomerRepository = CustomerRepositoryImpl(
+        dataSource, database.customerDao()
+    )
 }

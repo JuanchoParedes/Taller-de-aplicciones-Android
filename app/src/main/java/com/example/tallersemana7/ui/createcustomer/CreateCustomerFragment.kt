@@ -1,15 +1,19 @@
 package com.example.tallersemana7.ui.createcustomer
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.tallersemana7.R
 import com.example.tallersemana7.databinding.FragmentCreateCustomerBinding
+import com.example.tallersemana7.di.ComponentProvider
+import com.example.tallersemana7.ui.customersbymanager.CustomersByManagerViewModel
 import com.example.tallersemana7.ui.showAlertDialog
+import javax.inject.Inject
 
 class CreateCustomerFragment : Fragment() {
 
@@ -23,6 +27,18 @@ class CreateCustomerFragment : Fragment() {
     private lateinit var etEmail: EditText
 
     private lateinit var btCreateCustomer: Button
+
+    @Inject
+    lateinit var factory: CreateCustomerViewModelFactory
+    private lateinit var viewModel: CreateCustomerViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val component = (activity?.application as ComponentProvider).getComponent()
+        component.inject(this)
+
+        viewModel = ViewModelProvider(this, factory)[CreateCustomerViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,18 +60,41 @@ class CreateCustomerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val name = etName.text.toString().trim()
-        val lastName = etLastName.text.toString().trim()
-        val identification = etIdentification.text.toString().trim()
-        val phone = etPhone.text.toString().trim()
-        val email = etEmail.text.toString().trim()
+
         btCreateCustomer.setOnClickListener {
-            if(name.isNullOrEmpty() || lastName.isNullOrEmpty() || identification.isNullOrEmpty()
-                || phone.isNullOrEmpty() || email.isNullOrEmpty())
+            val name = etName.text.toString().trim()
+            val lastName = etLastName.text.toString().trim()
+            val identification = etIdentification.text.toString().trim()
+            val phone = etPhone.text.toString().trim()
+            val email = etEmail.text.toString().trim()
+            if (name.isEmpty() || lastName.isEmpty() || identification.isEmpty()
+                || phone.isEmpty() || email.isEmpty()
+            )
                 context?.showAlertDialog(
                     getString(R.string.alert_dialog_invalid_fields_body)
                 )
-            else {}
+            else viewModel.createCustomer(
+                name, lastName, identification, email, phone
+            )
+        }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.onCustomerCreatedSuccessLiveData.observe(viewLifecycleOwner) { success ->
+            if (success) {
+                context?.showAlertDialog(
+                    getString(R.string.alert_dialog_customer_created_body)
+                )
+                etName.setText("")
+                etLastName.setText("")
+                etIdentification.setText("")
+                etPhone.setText("")
+                etEmail.setText("")
+            } else
+                context?.showAlertDialog(
+                    getString(R.string.alert_dialog_general_error)
+                )
         }
     }
 

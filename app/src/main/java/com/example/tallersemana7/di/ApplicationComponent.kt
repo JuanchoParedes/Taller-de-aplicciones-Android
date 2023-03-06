@@ -1,6 +1,7 @@
 package com.example.tallersemana7.di
 
 import com.example.tallersemana7.MyApplication
+import com.example.tallersemana7.ui.createcustomer.CreateCustomerFragment
 import com.example.tallersemana7.ui.createmanager.CreateManagerFragment
 import com.example.tallersemana7.ui.customersbymanager.CustomersByManagerFragment
 import com.example.tallersemana7.ui.login.LoginActivity
@@ -24,4 +25,6 @@ interface ApplicationComponent {
     fun inject(fragment: CreateManagerFragment)
 
     fun inject(fragment: CustomersByManagerFragment)
+
+    fun inject(fragment: CreateCustomerFragment)
 }

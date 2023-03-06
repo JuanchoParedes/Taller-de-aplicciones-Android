@@ -2,6 +2,7 @@ package com.example.tallersemana7.data.preferences
 
 import android.content.SharedPreferences
 import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Single
 
 class SharedPrefsDataSource(
     private val sharedPreferences: SharedPreferences
@@ -16,6 +17,10 @@ class SharedPrefsDataSource(
                 apply()
             }
         }
+    }
+
+    fun getManager(): Single<String> = Single.fromCallable {
+        sharedPreferences.getString(MANAGER, "")
     }
 
     fun logoutManager(userName: String) {
