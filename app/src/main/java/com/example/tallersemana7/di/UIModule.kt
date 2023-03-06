@@ -1,9 +1,11 @@
 package com.example.tallersemana7.di
 
+import com.example.tallersemana7.domain.usecase.CreateCustomerUseCase
 import com.example.tallersemana7.domain.usecase.CreateManagerUseCase
 import com.example.tallersemana7.domain.usecase.FindManagerUseCase
 import com.example.tallersemana7.domain.usecase.LogInUseCase
 import com.example.tallersemana7.ui.createmanager.CreateManagerViewModelFactory
+import com.example.tallersemana7.ui.customersbymanager.CustomersByManagerViewModelFactory
 import com.example.tallersemana7.ui.login.LogInViewModelFactory
 import com.example.tallersemana7.ui.splash.SplashViewModelFactory
 import dagger.Module
@@ -28,6 +30,7 @@ class UIModule {
     ): LogInViewModelFactory = LogInViewModelFactory(
         useCase
     )
+
     @Singleton
     @Provides
     internal fun provideCreateManagerViewModelFactory(
@@ -35,4 +38,13 @@ class UIModule {
     ): CreateManagerViewModelFactory = CreateManagerViewModelFactory(
         createManagerUseCase
     )
+
+    @Singleton
+    @Provides
+    internal fun provideCustomersByManagerViewModelFactory(
+        useCase: CreateCustomerUseCase
+    ): CustomersByManagerViewModelFactory = CustomersByManagerViewModelFactory(
+        useCase
+    )
+
 }

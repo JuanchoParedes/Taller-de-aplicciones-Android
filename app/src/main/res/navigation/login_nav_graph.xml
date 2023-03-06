@@ -28,8 +28,6 @@
         tools:layout="@layout/fragment_create_manager"
         android:name="com.example.tallersemana7.ui.createmanager.CreateManagerFragment">
 
-
-
     </fragment>
 
     <activity

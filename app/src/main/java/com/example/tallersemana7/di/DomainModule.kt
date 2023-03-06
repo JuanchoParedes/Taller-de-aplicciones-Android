@@ -1,6 +1,8 @@
 package com.example.tallersemana7.di
 
+import com.example.tallersemana7.domain.repository.CustomerRepository
 import com.example.tallersemana7.domain.repository.ManagerRepository
+import com.example.tallersemana7.domain.usecase.CreateCustomerUseCase
 import com.example.tallersemana7.domain.usecase.CreateManagerUseCase
 import com.example.tallersemana7.domain.usecase.FindManagerUseCase
 import com.example.tallersemana7.domain.usecase.LogInUseCase
@@ -29,4 +31,13 @@ class DomainModule {
     internal fun provideLogInUseCase(
         repository: ManagerRepository
     ): LogInUseCase = LogInUseCase(repository)
+
+    @Singleton
+    @Provides
+    internal fun provideCreateCustomerUseCase(
+        repository: CustomerRepository
+    ): CreateCustomerUseCase = CreateCustomerUseCase(
+        repository
+    )
+
 }

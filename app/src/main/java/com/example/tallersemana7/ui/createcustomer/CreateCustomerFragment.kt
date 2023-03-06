@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import com.example.tallersemana7.R
 import com.example.tallersemana7.databinding.FragmentCreateCustomerBinding
+import com.example.tallersemana7.ui.showAlertDialog
 
 class CreateCustomerFragment : Fragment() {
 
@@ -43,7 +44,19 @@ class CreateCustomerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        btCreateCustomer.setOnClickListener {  }
+        val name = etName.text.toString().trim()
+        val lastName = etLastName.text.toString().trim()
+        val identification = etIdentification.text.toString().trim()
+        val phone = etPhone.text.toString().trim()
+        val email = etEmail.text.toString().trim()
+        btCreateCustomer.setOnClickListener {
+            if(name.isNullOrEmpty() || lastName.isNullOrEmpty() || identification.isNullOrEmpty()
+                || phone.isNullOrEmpty() || email.isNullOrEmpty())
+                context?.showAlertDialog(
+                    getString(R.string.alert_dialog_invalid_fields_body)
+                )
+            else {}
+        }
     }
 
 }

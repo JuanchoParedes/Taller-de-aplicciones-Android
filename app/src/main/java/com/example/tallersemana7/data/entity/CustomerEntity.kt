@@ -4,13 +4,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "CUSTOMER")
-data class CustomerEntity(
+class CustomerEntity {
     @PrimaryKey(autoGenerate = true)
-    val _id: Int,
-    val name: String,
-    val lastName: String,
-    val identification: String,
-    val phone: String,
-    val email: String,
-    val managerUsername: String
-)
+    var _id: Int? = null
+    var name: String? = null
+    var lastName: String? = null
+    var identification: String? = null
+    var phone: String? = null
+    var email: String? = null
+    var managerUsername: String? = null
+}

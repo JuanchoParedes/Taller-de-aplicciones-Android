@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/nav_home"
     android:id="@+id/main_nav_graph">
+
+    <fragment
+        tools:layout="@layout/fragment_customers_by_manager"
+        android:id="@+id/nav_home"
+        android:label="@string/customers_by_manager_title"
+        android:name="com.example.tallersemana7.ui.customersbymanager.CustomersByManagerFragment" >
+
+    </fragment>
+
+    <fragment
+        tools:layout="@layout/fragment_create_customer"
+        android:id="@+id/nav_create_customer"
+        android:label="@string/create_customer_title"
+        android:name="com.example.tallersemana7.ui.createcustomer.CreateCustomerFragment" >
+
+    </fragment>
 
 </navigation>

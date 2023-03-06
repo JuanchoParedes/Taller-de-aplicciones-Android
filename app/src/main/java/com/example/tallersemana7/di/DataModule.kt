@@ -8,7 +8,9 @@ import com.example.tallersemana7.data.db.DATABASE_NAME
 import com.example.tallersemana7.data.db.DataBase
 import com.example.tallersemana7.data.db.ManagerDao
 import com.example.tallersemana7.data.preferences.SharedPrefsDataSource
+import com.example.tallersemana7.data.repository.CustomerRepositoryImpl
 import com.example.tallersemana7.data.repository.ManagerRepositoryImpl
+import com.example.tallersemana7.domain.repository.CustomerRepository
 import com.example.tallersemana7.domain.repository.ManagerRepository
 import dagger.Module
 import dagger.Provides
@@ -45,4 +47,10 @@ class DataModule {
     ): ManagerRepository {
         return ManagerRepositoryImpl(dataSource, database.managerDao())
     }
+
+    @Singleton
+    @Provides
+    internal fun provideCustomerRepository(
+        database: DataBase
+    ): CustomerRepository = CustomerRepositoryImpl(database.customerDao())
 }

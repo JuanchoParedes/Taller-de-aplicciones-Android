@@ -18,4 +18,7 @@
     <string name="alert_dialog_manager_created_body">Manager created successfully!</string>
 
     <string name="alert_dialog_general_error">Something went wrong</string>
+
+    <string name="customers_by_manager_title">Customers by manager</string>
+    <string name="create_customer_title">Create Customer</string>
 </resources>

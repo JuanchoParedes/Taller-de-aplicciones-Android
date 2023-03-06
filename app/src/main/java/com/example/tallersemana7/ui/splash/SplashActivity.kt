@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.tallersemana7.R
 import com.example.tallersemana7.di.ComponentProvider
 import com.example.tallersemana7.ui.login.LoginActivity
+import com.example.tallersemana7.ui.main.MainActivity
 import javax.inject.Inject
 
 class SplashActivity : AppCompatActivity() {
@@ -37,6 +38,8 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun goToCustomerActivity() {
-     //   TODO("Not yet implemented")
+        startActivity(Intent(this, MainActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        })
     }
 }
