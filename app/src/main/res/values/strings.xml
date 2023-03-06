@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Taller Semana 7</string>
+    <string name="app_name">Taller Aplicacion Android</string>
     <string name="hint_name">Name</string>
     <string name="hint_last_name">Lastname</string>
     <string name="hint_identification">Identification</string>
