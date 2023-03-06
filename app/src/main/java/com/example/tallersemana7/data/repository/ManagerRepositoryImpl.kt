@@ -5,6 +5,8 @@ import com.example.tallersemana7.data.entity.mapToLocalEntity
 import com.example.tallersemana7.data.preferences.SharedPrefsDataSource
 import com.example.tallersemana7.domain.model.Manager
 import com.example.tallersemana7.domain.repository.ManagerRepository
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Single
 
 class ManagerRepositoryImpl(
     private val sharedPrefsDataSource: SharedPrefsDataSource,
@@ -15,12 +17,13 @@ class ManagerRepositoryImpl(
         return sharedPrefsDataSource.findManager()
     }
 
-    override fun createManager(username: String, password: String) {
-        managerDao.createManager(Manager(username, password).mapToLocalEntity())
-        sharedPrefsDataSource.registerManager(username)
+    override fun createManager(username: String, password: String): Completable {
+       return managerDao.createManager(Manager(username, password).mapToLocalEntity())
+           .andThen(sharedPrefsDataSource.registerManager(username))
     }
 
-    override fun logIn(username: String, password: String) {
-        managerDao.getManager(username, password)
-    }
+    override fun logIn(username: String, password: String): Single<Boolean> =
+        managerDao.getManager(username, password).flatMapCompletable {
+            sharedPrefsDataSource.registerManager(it.userName ?: "")
+        }.toSingle { true }
 }

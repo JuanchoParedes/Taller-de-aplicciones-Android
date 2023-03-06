@@ -14,5 +14,8 @@
     <string name="action_credits">Credits</string>
 
     <string name="alert_dialog_invalid_fields_body">All fields are required</string>
+    <string name="alert_dialog_user_does_not_exists_body">User does not exist</string>
+    <string name="alert_dialog_manager_created_body">Manager created successfully!</string>
 
+    <string name="alert_dialog_general_error">Something went wrong</string>
 </resources>
