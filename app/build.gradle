@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id "org.sonarqube" version "3.5.0.2730"
 }
 
 android {
@@ -34,6 +35,20 @@ android {
 
     buildFeatures {
         viewBinding true
+    }
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectName", "com.example.tallersemana7"
+        property "sonar.projectKey", "com.example.tallersemana7"
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.tests", ["src/test/java"]
+
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.sources", "src/main/java"
+        property "sonar.login", "admin"
+        property "sonar.password", "0000"
     }
 }
 
